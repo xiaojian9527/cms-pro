@@ -1,6 +1,7 @@
 package com.cms.portal.controller.admin;
 
 import com.google.code.kaptcha.Producer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @Controller
+@Slf4j
 public class LoginController {
 
     @Resource
@@ -31,8 +33,10 @@ public class LoginController {
         try(ServletOutputStream outputStream = httpServletResponse.getOutputStream()) {
             ImageIO.write(image, "jpg", outputStream);
         }catch (IOException e){
-            e.printStackTrace();
+            log.error("验证码生成失败");
         }
     }
+
+
 
 }
